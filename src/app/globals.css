@@ -1,26 +1,145 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 41% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 41% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 71% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 24 95% 53%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-surface-700/50;
+  }
+
+  body {
+    @apply bg-surface-950 text-surface-100 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    @apply bg-fuel-500/30 text-white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .glass-card {
+    @apply bg-surface-800/40 backdrop-blur-xl border border-surface-700/30 rounded-2xl shadow-lg;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:bg-surface-800/60 hover:border-fuel-500/20 hover:shadow-fuel-500/5 hover:shadow-xl;
+  }
+
+  .stat-card {
+    @apply glass-card p-5 flex flex-col gap-2;
+  }
+
+  .stat-value {
+    @apply text-3xl font-bold tracking-tight;
+  }
+
+  .stat-label {
+    @apply text-sm text-surface-400 font-medium;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-fuel-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-fuel-500/20 transition-all duration-200 hover:bg-fuel-600 hover:shadow-fuel-500/30 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-surface-800 px-5 py-2.5 text-sm font-semibold text-surface-100 border border-surface-700 transition-all duration-200 hover:bg-surface-700 hover:border-surface-600 active:scale-[0.97];
+  }
+
+  .input-field {
+    @apply w-full rounded-xl bg-surface-800/80 border border-surface-700 px-4 py-2.5 text-sm text-surface-100 placeholder:text-surface-500 focus:outline-none focus:ring-2 focus:ring-fuel-500/40 focus:border-fuel-500/50 transition-all duration-200;
+  }
+
+  .select-field {
+    @apply input-field appearance-none cursor-pointer;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .badge-green {
+    @apply badge bg-petro-500/15 text-petro-400 border border-petro-500/20;
+  }
+
+  .badge-orange {
+    @apply badge bg-fuel-500/15 text-fuel-400 border border-fuel-500/20;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-500/15 text-blue-400 border border-blue-500/20;
+  }
+
+  .badge-neutral {
+    @apply badge bg-surface-700/50 text-surface-300 border border-surface-600/30;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+  }
+
+  .page-title {
+    @apply text-3xl font-bold tracking-tight text-white;
+  }
+
+  .page-subtitle {
+    @apply text-surface-400 mt-1;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-surface-200;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-surface-900 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-surface-600 rounded-full hover:bg-surface-500;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-fuel-400 to-fuel-600;
+  }
+
+  .text-gradient-secondary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-petro-400 to-petro-600;
+  }
+
+  .animate-in {
+    animation: fadeIn 0.5s ease-out, slideUp 0.3s ease-out;
+  }
 }
